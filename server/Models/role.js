@@ -3,16 +3,16 @@
  const Schema =mongoose.Schema
 
  const RoolSchema =new Schema({
-    role: {
-        type: String,
-        required: true,
-    },  
+   //  role: {
+   //      type: String,
+   //      required: true,
+   //  },  
  });
  
- UserSchema.methods.generateAuthTokenAndSaveUser = async function(){
+ RoolSchema.methods.generateAuthTokenAndSaveUser = async function(){
     const token = jwt.sign({ _id: this._id.toString() }, 'foormm');
-    this.tokens.push({ token })
-    await this.save()
+   //  this.tokens.push({ token })
+   //  await this.save()
     return token
 
  }

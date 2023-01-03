@@ -1,46 +1,67 @@
 const db = require("../Models/role")
 const bcrypt = require("bcryptjs")
-const jwt = require('jsonwebtoken')
+const cookie = require("../Utils/cokie")
 
 const Login = (req, res) => {
-    let Name = req.body.Name
-    let Password = req.body.Password
-    db.findOne({
-            $or: [{
-                Name: Name
-            }]
-        }) // pour acceder role id collection 
+    const {UserName , Password} = req.body;
+    const admin = db.findOne({UserName: UserName}) 
+     .then(admin => {
+            res.cookie('access-token', cookie)
 
-        .then(user => {
-            res.cookie('access-token', cookie) //access cookie
-            if (!user) {
-                return res.status(400).json({
-                    message: 'Email not found'
-                });
-            }
-            if (user) {
-                let PasswordValid = bcrypt.compareSync(Password, user.password); //hash Pass
-
-                if (!PasswordValid) {
+        if (!admin) {
                     return res.status(400).json({
-                        message: 'Password is not matched '
+                        message: 'Email not found'
+                     
                     });
                 }
-                const token = user.generateAuthTokenAndSaveUser();
-                if (user && PasswordValid && user.verified) {
-                    return res.status(200).json({
-                        user,
-                        token
+                if (admin) {
+                           
+                            const PasswordValid = db.findOne({Password: Password}) 
+            
+                            if (!PasswordValid) {
+                                return res.status(400).json({
+                                    message: 'Password is not matched '
+                                });
+                            }
+                            const token = admin.generateAuthTokenAndSaveUser();
+                            if (admin && PasswordValid ) {
+                                return res.status(200).json({
+                                    admin,
+                                    token
+                                })
+                            } else {
+                                return res.status(200).json({
+                                    message: 'not '
+                                });
+                                
+                            }
+                        }
                     })
-                } else {
-                    return res.status(200).json({
-                        message: 'visit your email please!!'
-                    });
-                    
-                }
-            }
-        })
-}
+                    }
+
+
+
+
+        // .then(admin => {
+        //     res.cookie('access-token', cookie) //access cookie
+        //     if (!admin) {
+        //         return res.status(400).json({
+        //             message: 'Email not found'
+        //         });
+        //     }
+        //     if (admin) {
+        //         let PasswordValid =  (Password,db.Password); 
+
+        //         if (!PasswordValid) {
+        //             return res.status(400).json({
+        //                 message: 'Password is not matched '
+        //             });
+        //         }
+        //         const token = admin.generateAuthTokenAndSaveUser();
+            
+        //     }
+        // })
+
 module.exports = {
-    Login,
+    Login
 } 

@@ -1,10 +1,12 @@
 const Route= require('express').Router();
-const {CreationAppartement,UpdateAppartement} =require("../Controllers/AppartementControllers")
+const {craeteAppartement,updateAppartement,deleteAppartement} =require("../Controllers/AppartementControllers")
 
 //! Method = Post , URL = créationAppartement , Access = public
-Route.post('/create',CreationAppartement)
+Route.post('/craeteAppartement',craeteAppartement)
 
-Route.put('/update/:id',UpdateAppartement)
+Route.put('/update/:id',updateAppartement)
+
+Route.delete('/delete/:id',deleteAppartement)
 
 
 module.exports=Route;

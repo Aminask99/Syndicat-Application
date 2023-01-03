@@ -1,8 +1,9 @@
 const Route= require('express').Router();
-const {CreationPaiement} =require("../Controllers/PaiementController")
+const {creationPaiement,updatePaiement} =require("../Controllers/PaiementController")
 
 //! Method = Post , URL = créationAppartement , Access = public
-Route.post('/creationPaiement',CreationPaiement)
+Route.post('/creationPaiement',creationPaiement)
+Route.put('/updatePaiement/:id',updatePaiement)
 
 
 module.exports=Route;

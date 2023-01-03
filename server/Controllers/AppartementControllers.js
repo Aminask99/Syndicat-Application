@@ -1,8 +1,7 @@
 const db = require("../Models/appartement")
 
 
-
-const CreationAppartement=(req,res) =>{
+const craeteAppartement=(req,res) =>{
     let Appartement = new db({
         Name_appartement: req.body.Name_appartement,
         Nb_etage: req.body.Nb_etage,
@@ -23,7 +22,7 @@ const CreationAppartement=(req,res) =>{
             })
         })
 }
-const UpdateAppartement = ( async(req,res)=>{
+const updateAppartement = ( async(req,res)=>{
 
         const {Name_appartement, Nb_etage, ville, prix, address } = req.body
         const id =  req.params.id;
@@ -49,68 +48,24 @@ const UpdateAppartement = ( async(req,res)=>{
             }
     })
 
-
-
-
-
-
-
-
-
-
-    // const {appartement} = req.body;
-    // if(appartement){
-    //     try {
-    //         const newCategorie = await db.updateOne({appartement},{where:{id}})
-    //         res.status(200).send({message:"update  success"})
-    //     } catch (error) {
-    //         res.status(400)
-    //         throw new Error(error)
-    //     }
-    // }else{
-    //     res.status(400)
-    //     throw new Error("Please add a text field")
-    // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // const { New_Name_appartement, New_Nb_etage, New_ville, New_prix, New_address } = req.body;
-        // if (!New_Name_appartement || !New_Nb_etage || !New_ville || !New_prix || !New_address) {
-        //     res.status(400).send('Please fill all fields.')
-        // }
-        
-        // await db.updateOne(
-        //     {
-        //         Name_appartement: New_Name_appartement,
-        //         Nb_etage: New_Nb_etage,
-        //         ville: New_ville,
-        //         prix: New_prix,
-        //         address: New_address,
-        //     },
-        //     {
-        //         where: { Name_appartement: New_Name_appartement },
-        //     }
+    const deleteAppartement = (async (req, res) => {
+        const id =  req.params.id;
+        try {
+            const deleteAppartement = await db.deleteOne({where:{id}})
+            return  res.status(200).json({message:"delete success"})
+            
+        } catch (err) {
+            // console.log(err)
+            return  res.status(400).json({message:"Not delet code promo"})
            
-        // );
-        // console.log("yes")
+          
+        }
+        
+    })
     
 
 module.exports = {
-    CreationAppartement,
-    UpdateAppartement
+    craeteAppartement,
+    updateAppartement,
+    deleteAppartement
 }

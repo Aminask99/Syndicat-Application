@@ -5,16 +5,20 @@
  const paiementSchema =new Schema({
     Name_Client: {
         type: String,
+        required: true,
        
     },
     date_facteur: {
-        type: String,
+        type: Date,
+        required: true,
     },
     date_payment: {
-        type: String,
+        type: Date,
+        required: true,
     },
     apartement: {
-        type: Number,
+        type: String,
+        required: true,
       
     }, 
     role: {

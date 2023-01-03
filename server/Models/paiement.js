@@ -17,6 +17,10 @@
         type: Number,
       
     }, 
+    role: {
+        type: mongoose.Types.ObjectId,
+        ref: "Appartement"  // refernse table 
+    }
     
  });
 

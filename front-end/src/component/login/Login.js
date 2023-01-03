@@ -38,7 +38,7 @@ export default function Login() {
 
          
           // navigate('/' + role)
-          // toast.success("login Success")
+          toast.success("login Success")
         
         const msg = result.data.message;
         toast.success(msg)

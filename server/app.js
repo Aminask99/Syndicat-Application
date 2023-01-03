@@ -6,13 +6,15 @@ const routerAppartement = require("./Routes/AppartementRouter")
 const routerPaiement = require("./Routes/PaiementRouters")
 const Auth = require("./Routes/AuthRouter")
 const roleModal = require("./Models/role")
-const cookiepaeser= require("cookie-parser") // prowser annalizer cookie fy header
+const cookiepaeser= require("cookie-parser")
+const cors = require('cors'); // prowser annalizer cookie fy header
 
 
 dotenv.config();
 app.use(express.json())
 app.use(cookiepaeser()) 
 app.use(express.urlencoded({extended:false}))
+app.use(cors()); 
   
  //*routes middleware
 app.use('/api', routerAppartement);

@@ -3,10 +3,13 @@
  const Schema =mongoose.Schema
 
  const RoolSchema =new Schema({
-   //  role: {
-   //      type: String,
-   //      required: true,
-   //  },  
+  UserName: {
+    type: String,
+   
+},
+  Password: {
+    type: String,
+},
  });
  
  RoolSchema.methods.generateAuthTokenAndSaveUser = async function(){

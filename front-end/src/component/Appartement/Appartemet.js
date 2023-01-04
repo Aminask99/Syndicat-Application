@@ -1,13 +1,56 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import axios from 'axios'
+
 
 export default function Appartemet() {
+  //modal
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+//api 
+  const [db, setCommande]= useState([])
+  const [loading, setLoading] = useState(false)
+  const [update , SetUpdate] = useState('')
+
+  const [Name_appartement, setAppartement] = useState("")
+  const [Nb_etage, setEtage] = useState("")
+  const [ville, setVille] = useState("")
+  const [prix, setPrix] = useState("")
+  const [address, setAdress] = useState("")
+
+
+  const Appartement =(e)=>{
+  axios.post('http://localhost:8000/api/codePromo/creatPromoCode', {
+      
+  Name_appartement: Name_appartement,
+  Nb_etage: Nb_etage,
+  ville: ville,
+  prix: prix,
+  address: address
+  
+})
+.then(result => {
+SetUpdate('add data')
+setLoading(true)
+
+
+console.log(result)
+
+})
+.catch(err => {
+console.log(err)
+
+})
+}
+
+
+
+
 
 
   return (
@@ -235,13 +278,18 @@ export default function Appartemet() {
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row"> </th>
-      <td> </td>
-      <td></td>
-      <td></td>
-      <td></td>
-    </tr>
+   {db.map((item)=>(
+
+      <tr key={item.id}>
+      <th scope="row">{item.Name_appartement} </th>
+      <td>{item.Nb_etage} </td>
+      <td>{item.ville}</td>
+      <td>{item.prix}</td>
+      <td>{item.address}</td>
+      </tr>
+
+   ))} 
+   
     
   </tbody>
 </table>

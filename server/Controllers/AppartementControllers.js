@@ -1,6 +1,5 @@
 const db = require("../Models/appartement")
 
-
 const craeteAppartement=(req,res) =>{
     let Appartement = new db({
         Name_appartement: req.body.Name_appartement,

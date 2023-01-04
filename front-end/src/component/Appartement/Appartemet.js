@@ -1,6 +1,15 @@
 import React from 'react'
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 export default function Appartemet() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
   return (
     <div>
          <div>
@@ -28,45 +37,13 @@ export default function Appartemet() {
       <li>
         <a href="./icons.html">
           <i className="tim-icons icon-atom" />
-          <p>Icons</p>
+          <p>Paiement</p>
         </a>
       </li>
-      <li>
-        <a href="./map.html">
-          <i className="tim-icons icon-pin" />
-          <p>Maps</p>
-        </a>
-      </li>
-      <li>
-        <a href="./notifications.html">
-          <i className="tim-icons icon-bell-55" />
-          <p>Notifications</p>
-        </a>
-      </li>
-      <li>
-        <a href="./user.html">
-          <i className="tim-icons icon-single-02" />
-          <p>User Profile</p>
-        </a>
-      </li>
-      <li>
-        <a href="./tables.html">
-          <i className="tim-icons icon-puzzle-10" />
-          <p>Table List</p>
-        </a>
-      </li>
-      <li>
-        <a href="./typography.html">
-          <i className="tim-icons icon-align-center" />
-          <p>Typography</p>
-        </a>
-      </li>
-      <li>
-        <a href="./rtl.html">
-          <i className="tim-icons icon-world" />
-          <p>RTL Support</p>
-        </a>
-      </li>
+     
+     
+      
+     
     </ul>
   </div>
 </div>
@@ -195,11 +172,49 @@ export default function Appartemet() {
         <div className="row">
           <div className="col-12">
             <div className="card card-chart">
-              <div className="card-header ">
+              <div className="card-header  ">
                 <div className="row">
                   <div className="col-sm-6 text-left">
-                    {/* <h5 className="card-category">Total Shipments</h5> */}
-                    <h2 className="card-title">dashboard</h2>
+                  
+                  <>
+      <Button variant="primary" onClick={handleShow}>
+        add appartement
+      </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Appartement</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="bg-dark">
+          
+     <form>
+  <div className="form-group ">
+    <label htmlFor="exampleInputEmail1">Email address</label>
+    <input type="email" className="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div className="form-group">
+    <label htmlFor="exampleInputPassword1">Password</label>
+    <input type="password" className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
+  </div>
+  <div className="form-check">
+    <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+    
+  </div>
+  <button type="submit" className="btn btn-primary">Submit</button>
+</form>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
                   </div>
                  
                 </div>
@@ -208,38 +223,26 @@ export default function Appartemet() {
             </div>
           </div>
         </div>
-     <h2 className="card-title">Music</h2>
-
-
-
+ 
      <table class="table table-striped table-dark">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">appartement</th>
+      <th scope="col">Nb étage</th>
+      <th scope="col">vile</th>
+      <th scope="col">prix</th>
+      <th scope="col">address</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row"> </th>
+      <td> </td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+    
   </tbody>
 </table>
 

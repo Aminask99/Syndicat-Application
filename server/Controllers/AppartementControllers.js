@@ -22,6 +22,7 @@ const craeteAppartement=(req,res) =>{
             })
         })
 }
+
 const updateAppartement = ( async(req,res)=>{
 
         const {Name_appartement, Nb_etage, ville, prix, address } = req.body
@@ -48,7 +49,7 @@ const updateAppartement = ( async(req,res)=>{
             }
     })
 
-    const deleteAppartement = (async (req, res) => {
+const deleteAppartement = (async (req, res) => {
         const id =  req.params.id;
         try {
             const deleteAppartement = await db.deleteOne({where:{id}})
@@ -57,13 +58,9 @@ const updateAppartement = ( async(req,res)=>{
         } catch (err) {
             // console.log(err)
             return  res.status(400).json({message:"Not delet code promo"})
-           
-          
-        }
-        
+        }  
     })
     
-
 module.exports = {
     craeteAppartement,
     updateAppartement,

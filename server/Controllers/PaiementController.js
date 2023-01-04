@@ -46,6 +46,7 @@ const updatePaiement = ( async(req,res)=>{
             throw new Error(error)
         }
 })
+
 module.exports = {
     creationPaiement,
     updatePaiement

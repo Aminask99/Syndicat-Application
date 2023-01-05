@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState,Navigate } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
@@ -11,8 +11,8 @@ export default function Login() {
   const [UserName, setUserName] = useState("")
   const [Password, setPassword] = useState("")
   // const [error, setError] = useState(false)
+
   const navigate = useNavigate()
-  // const navigate = useNavigate()
   const handleApi = (e) => {
     e.preventDefault()
 
@@ -29,23 +29,12 @@ export default function Login() {
     })
 
       .then(result => {
-
-        if (result.data.tokens) {
-         
-          const role = result.data.user.tokens.token;
-          localStorage.setItem("role", role)
-          localStorage.setItem('UserName', result.data.user.UserName);
-          localStorage.setItem('Password', result.data.user.Password);
-
-          console.log(result.data.user.role)
-          navigate('/appartement')
-         
-        }
-
-
-
-
-        console.log(result)
+       
+       console.log(result.data.user.tokens[0])
+       localStorage.setItem("token",result.data.user.tokens[0].token);
+       localStorage.setItem("UserName",result.data.user.UserName);
+       navigate("/appartement")
+     
           // const role = result.data.user.role.role;
 
           // localStorage.setItem("role", role)
@@ -54,8 +43,8 @@ export default function Login() {
 
          
           // navigate('/' + role)
-          toast.success("login Success")
-          navigate('/appartement')
+        
+          
         
         const msg = result.data.message;
         toast.success(msg)

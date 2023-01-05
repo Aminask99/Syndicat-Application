@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken')
         type: String,
     },
     tokens:[{
+      
         token:{ 
             type: String, 
         }
@@ -25,8 +26,8 @@ const jwt = require('jsonwebtoken')
     const token = jwt.sign({ _id: this._id.toString() }, 'foormm');
     this.tokens.push({ token })
     await this.save()
-    // return token
-    console.log(token)
+    return token
+    // console.log(token)
 
  }
  const User = mongoose.model('admin',AdminSchema)

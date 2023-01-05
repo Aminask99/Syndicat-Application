@@ -3,10 +3,16 @@ import { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'
+import { Link } from 'react-router-dom'
+
 import './appartement.css';
 
 
 export default function Appartemet() {
+
+  
+  let UserName = localStorage.getItem('UserName');
+
   //modal
   const [show, setShow] = useState(false);
 
@@ -69,6 +75,12 @@ const deletApartement = (id)=> {
   .catch(err => {
     console.log(err)
   })    
+}
+function logout() {
+
+  localStorage.clear();
+  window.location.replace('http://localhost:3000/')
+
 }
 
 // console.log(codepromo)
@@ -240,6 +252,8 @@ const deletApartement = (id)=> {
             <Button className="" variant="primary" onClick={handleShow}>
         add appartement
       </Button>
+      <h1> {UserName} </h1>
+      <Link to="/Register" className="book-a-table-btn scrollto d-none d-lg-flex" onClick={logout}>logout</Link>
         
      
 

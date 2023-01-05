@@ -23,7 +23,18 @@ export default function Appartemet() {
   const [date_facteur, setDatefacteur] = useState("")
   const [date_payment, setDate_payment] = useState("")
   const [apartement, setaPartement] = useState("")
+  const [companyList,setCompanyList]=useState([])
 
+useEffect(()=>{
+  const fetchData =async ()=>{
+      const response = await fetch(`http://localhost:8080/api/getAllPaiements`)
+      const newData = await response.json();
+      setCompanyList(newData);
+      // console.log(newData)
+  };
+  fetchData();
+
+},[] )
   const getAllPaiements = async () => {
    
     const res = await axios.get('http://localhost:8080/api/getAllPaiements')
@@ -267,11 +278,24 @@ const deletePaiment = (id)=> {
     <input type="date"
     name="date_payment" value={date_payment} onChange={(e) => setDate_payment(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
-  <div className="form-group">
+
+
+  <select name="apartement"value={apartement}onChange={(e) => setaPartement(e.target.value)} class="form-select" aria-label="Default select example">
+  <option selected>appartement</option>
+  {companyList.map(conpan =>(
+     <option  value={conpan.apartement}key={conpan.id}>{conpan.apartement}</option>
+  ))
+    
+  }
+ 
+</select>
+
+
+  {/* <div className="form-group">
     <label htmlFor="exampleInputPassword1">appartement</label>
     <input type="text"
     name="apartement" value={apartement} onChange={(e) => setaPartement(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
-  </div>
+  </div> */}
 
   <div className="form-check">
     <input type="checkbox" className="form-check-input" id="exampleCheck1" />

@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'
-import './appartement.css';
+import './paiement.css';
 
 
 export default function Appartemet() {
@@ -14,37 +14,36 @@ export default function Appartemet() {
   const handleShow = () => setShow(true);
 
 //api 
+
   const [db,setDb]= useState([])
   const [loading, setLoading] = useState(false)
   const [update , SetUpdate] = useState('')
   
-  const [Name_appartement, setAppartement] = useState("")
-  const [Nb_etage, setEtage] = useState("")
-  const [ville, setVille] = useState("")
-  const [prix, setPrix] = useState("")
-  const [address, setAdress] = useState("")
+  const [Name_Client, setName_Client] = useState("")
+  const [date_facteur, setDatefacteur] = useState("")
+  const [date_payment, setDate_payment] = useState("")
+  const [apartement, setaPartement] = useState("")
 
-  const getAppartement = async () => {
+  const getAllPaiements = async () => {
    
-    const res = await axios.get('http://localhost:8080/api/getAllAppartemnet')
+    const res = await axios.get('http://localhost:8080/api/getAllPaiements')
     setDb(res.data)
     setLoading(true)
   }
   useEffect(() => {
-    getAppartement()
+    getAllPaiements()
     SetUpdate('all data')
   }, [update])
   console.log(db)
 
-  const Appartement =(e)=>{
+  const Paiement =(e)=>{
        e.preventDefault()
-  axios.post('http://localhost:8080/api/craeteAppartement', {
+  axios.post('http://localhost:8080/api/creationPaiement', {
       
-  Name_appartement: Name_appartement,
-  Nb_etage: Nb_etage,
-  ville: ville,
-  prix: prix,
-  address: address
+  Name_Client: Name_Client,
+  date_facteur: date_facteur,
+  date_payment: date_payment,
+  apartement: apartement,
 
 })
 
@@ -57,9 +56,9 @@ export default function Appartemet() {
 console.log(err)
 })
 }
-const deletApartement = (id)=> {
+const deletePaiment = (id)=> {
   // Simple DELETE request with axios
-  axios.delete(`http://localhost:8080/api/delete/${id}`) //endPoint
+  axios.delete(`http://localhost:8080/api/deletePaiment/${id}`) //endPoint
   .then(result => {
     SetUpdate('delete data')
     setLoading(true)
@@ -80,7 +79,7 @@ const deletApartement = (id)=> {
   {/*
   Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     */}
-  <div className="sidebar-wrapper bg-dark">
+  <div className="sidebar-wrapper">
     <div className="logo">
       <a href="http://www.creative-tim.com" className="simple-text logo-mini">
         CT
@@ -227,55 +226,48 @@ const deletApartement = (id)=> {
         </div>
       </div>
       {/* End Navbar */}
-      <div className="content  w-25 text-center">
+      <div className="content">
         <div className="row">
           <div className="col-12">
             <div className="card card-chart">
-            
-
-            <>
-          
-            <Button className="" variant="primary" onClick={handleShow}>
-        add appartement
+              <div className="card-header  ">
+                <div className="row">
+                  <div className="col-sm-6 text-left">
+                  
+                  <>
+      <Button variant="primary" onClick={handleShow}>
+        add paiement
       </Button>
-        
-     
 
-      <Modal  className="text-white"show={show} onHide={handleClose}>
-        <Modal.Header className="bg-dark" closeButton>
-          <Modal.Title>Appartement</Modal.Title>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Paiement</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="bg-dark ">
+        <Modal.Body className="bg-dark">
           
      <form>
  
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">appartement</label>
+    <label htmlFor="exampleInputPassword1">Password</label>
     <input type="text"
-    name="Name_appartement" value={Name_appartement} onChange={(e) => setAppartement(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
+    name="Name_Client" value={Name_Client} onChange={(e) => setName_Client(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">nb tage</label>
-    <input type="text"
-    name="Nb_etage" value={Nb_etage} onChange={(e) => setEtage(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
+    <label htmlFor="exampleInputPassword1">Password</label>
+    <input type="date"
+    name="date_facteur" value={date_facteur} onChange={(e) => setDatefacteur(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">ville</label>
-    <input type="text"
-    name="ville" value={ville} onChange={(e) => setVille(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
+    <label htmlFor="exampleInputPassword1">Password</label>
+    <input type="date"
+    name="date_payment" value={date_payment} onChange={(e) => setDate_payment(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">prix</label>
+    <label htmlFor="exampleInputPassword1">Password</label>
     <input type="text"
-    name="prix" value={prix} onChange={(e) => setPrix(e.target.value)} className="form-control text-red " id="exampleInputPassword1" placeholder="Password" />
+    name="apartement" value={apartement} onChange={(e) => setaPartement(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
-  <div className="form-group ">
-    <label htmlFor="exampleInputEmail1">address</label>
-    <input type="text"
-    name="address" value={address} onChange={(e) => setAdress(e.target.value)}
-     className="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-    <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
+
   <div className="form-check">
     <input type="checkbox" className="form-check-input" id="exampleCheck1" />
     
@@ -284,19 +276,22 @@ const deletApartement = (id)=> {
 </form>
 
         </Modal.Body>
-        <Modal.Footer className="bg-dark">
+        <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button    type="button"
           className="btn btn-light"
-          data-bs-dismiss="modal"variant="primary"  onClick={Appartement}>
+          data-bs-dismiss="modal"variant="primary"  onClick={Paiement}>
             Save Changes
           </Button>
         </Modal.Footer>
       </Modal>
     </>
-
+                  </div>
+                 
+                </div>
+              </div>
 
             </div>
           </div>
@@ -311,12 +306,11 @@ const deletApartement = (id)=> {
       <div className="card bghh" style={{width: '18rem'}}>
         <img src="assets/img/appar.jpg" className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">{item.Name_appartement }</h5>
-          <h6 className="card-subtitle mb-2 text-muted">{item.Nb_etage}</h6>
-          <p className="card-text">{item.ville}</p>
-          <h6 className="card-subtitle mb-2 text-muted">{item.prix}</h6>
-          <h6 className="card-subtitle mb-2 text-muted">{item.address}</h6>
-          <a href="#" onClick={() => deletApartement(item.id)}  className="btn mr-2">delete</a>
+          <h5 className="card-title">{item.Name_Client }</h5>
+          <h6 className="card-subtitle mb-2 text-muted">{item.date_facteur}</h6>
+          <p className="card-text">{item.date_payment}</p>
+          <h6 className="card-subtitle mb-2 text-muted">{item.apartement}</h6>
+          <a href="#" onClick={() => deletePaiment(item.id)}  className="btn mr-2">delete</a>
           <a href="#" className="btn "><i className="fab fa-github w-50" /></a>
         </div>
       </div>
@@ -324,15 +318,7 @@ const deletApartement = (id)=> {
   </div>
 </div>
 
-
-
-
-
-
-   
-    )
-}
-)
+)})
 }
 </div>
 

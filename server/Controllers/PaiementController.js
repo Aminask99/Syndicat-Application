@@ -46,8 +46,30 @@ const updatePaiement = ( async(req,res)=>{
             throw new Error(error)
         }
 })
+const deletePaiment = (async (req, res) => {
+    const id =  req.params.id;
+    try {
+        const deletePaiement = await db.deleteOne({where:{id}})
+        return  res.status(200).json({message:"delete success"})
+        
+    } catch (err) {
+        // console.log(err)
+        return  res.status(400).json({message:"Not delet code promo"})
+    }  
+})
+const getAllPaiements = ( async(req,res)=>{
+    try {
+        const allPaiement = await db.find()
+        res.status(200).send(allPaiement)
+    } catch (error) {
+        res.status(400)
+        throw new Error(error)
+    }
+})
 
 module.exports = {
     creationPaiement,
-    updatePaiement
+    updatePaiement,
+    deletePaiment,
+    getAllPaiements
 }

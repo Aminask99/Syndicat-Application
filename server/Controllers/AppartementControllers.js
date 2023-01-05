@@ -1,6 +1,8 @@
 const db = require("../Models/appartement")
 
 const craeteAppartement=(req,res) =>{
+
+    console.log(req.body);
     let Appartement = new db({
         Name_appartement: req.body.Name_appartement,
         Nb_etage: req.body.Nb_etage,
@@ -17,7 +19,7 @@ const craeteAppartement=(req,res) =>{
 
         .catch(error => {
             return  res.status(400).json({
-                message: "error not creat user"
+                message: error.message
             })
         })
 }
@@ -59,9 +61,19 @@ const deleteAppartement = (async (req, res) => {
             return  res.status(400).json({message:"Not delet code promo"})
         }  
     })
+    const getAllAppartemnet = ( async(req,res)=>{
+        try {
+            const allAppartement = await db.find()
+            res.status(200).send(allAppartement)
+        } catch (error) {
+            res.status(400)
+            throw new Error(error)
+        }
+ })
     
 module.exports = {
     craeteAppartement,
     updateAppartement,
-    deleteAppartement
+    deleteAppartement,
+    getAllAppartemnet
 }

@@ -80,7 +80,7 @@ const deletApartement = (id)=> {
   {/*
   Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
     */}
-  <div className="sidebar-wrapper bg-dark">
+  <div className="sidebar-wrapper ">
     <div className="logo">
       <a href="http://www.creative-tim.com" className="simple-text logo-mini">
         CT
@@ -227,11 +227,13 @@ const deletApartement = (id)=> {
         </div>
       </div>
       {/* End Navbar */}
-      <div className="content  w-25 text-center">
+      <div className="content  text-center">
         <div className="row">
           <div className="col-12">
             <div className="card card-chart">
-            
+             <div className="card-header  ">
+                <div className="row">
+                  <div className="col-sm-6 text-left">
 
             <>
           
@@ -297,13 +299,16 @@ const deletApartement = (id)=> {
       </Modal>
     </>
 
-
+    </div> 
+     </div> 
+      </div>
             </div>
           </div>
         </div>
         <div className='element '>
         { db.map((item ) => {
     return(
+
 
 <div className="container mx-auto mt-4">
   <div className="row">

@@ -235,35 +235,40 @@ const deletePaiment = (id)=> {
                   <div className="col-sm-6 text-left">
                   
                   <>
+                 
+
+                 
+                 
       <Button variant="primary" onClick={handleShow}>
         add paiement
       </Button>
+  
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Paiement</Modal.Title>
+      <Modal className="tetx-white" show={show} onHide={handleClose}>
+        <Modal.Header className="bg-dark" closeButton>
+          <Modal.Title className="text-white">Paiement</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-dark">
           
-     <form>
+     <form className='text-white'>
  
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">Password</label>
+    <label htmlFor="exampleInputPassword1">Name</label>
     <input type="text"
     name="Name_Client" value={Name_Client} onChange={(e) => setName_Client(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">Password</label>
+    <label htmlFor="exampleInputPassword1">date facteur</label>
     <input type="date"
     name="date_facteur" value={date_facteur} onChange={(e) => setDatefacteur(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">Password</label>
+    <label htmlFor="exampleInputPassword1">date payment</label>
     <input type="date"
     name="date_payment" value={date_payment} onChange={(e) => setDate_payment(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">Password</label>
+    <label htmlFor="exampleInputPassword1">appartement</label>
     <input type="text"
     name="apartement" value={apartement} onChange={(e) => setaPartement(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>
@@ -276,7 +281,7 @@ const deletePaiment = (id)=> {
 </form>
 
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="bg-dark">
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
@@ -300,23 +305,37 @@ const deletePaiment = (id)=> {
         { db.map((item ) => {
     return(
 
-<div className="container mx-auto mt-4">
+<div className="container mt-5 mb-3">
   <div className="row">
-    <div className="col-md-4">
-      <div className="card bghh" style={{width: '18rem'}}>
-        <img src="assets/img/appar.jpg" className="card-img-top" alt="..." />
-        <div className="card-body">
-          <h5 className="card-title">{item.Name_Client }</h5>
-          <h6 className="card-subtitle mb-2 text-muted">{item.date_facteur}</h6>
-          <p className="card-text">{item.date_payment}</p>
-          <h6 className="card-subtitle mb-2 text-muted">{item.apartement}</h6>
-          <a href="#" onClick={() => deletePaiment(item.id)}  className="btn mr-2">delete</a>
-          <a href="#" className="btn "><i className="fab fa-github w-50" /></a>
+    <div className="col-md-">
+      <div className="card p-3 mb-2">
+        <div className="d-flex justify-content-between">
+          <div className="d-flex flex-row align-items-center">
+            <div className="w-50"><img src="assets/img/appar.jpg" className="card-img-top" alt="..." /> </div>
+            <div className="ms-2 c-details">
+              <h6 className="mb-0">{item.Name_Client }</h6> <span>1 days ago</span>
+            </div>
+          </div>
+       
+        </div>
+        <div className="mt-5">
+          <p className="heading">la date de facteur:{item.date_facteur}<br /> date de oayment :{item.date_payment}</p>
+          <p className="heading">{item.apartement}</p>
+          <div className="mt-5">
+            
+            <div className="mt-3"> <span className="text1">32 Applied <span className="text2">facteur</span></span> </div>
+          </div>
         </div>
       </div>
-    </div>            
+    </div>
   </div>
 </div>
+
+
+
+
+
+
 
 )})
 }

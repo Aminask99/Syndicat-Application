@@ -322,7 +322,7 @@ const deletePaiment = (id)=> {
           <p className="heading">la date de facteur:{item.date_facteur}<br /> date de oayment :{item.date_payment}</p>
           <p className="heading">{item.apartement}</p>
           <div className="mt-5">
-            
+          <a href="#" className="btn mr-2">Imprémer</a>
             <div className="mt-3"> <span className="text1">32 Applied <span className="text2">facteur</span></span> </div>
           </div>
         </div>
@@ -341,15 +341,6 @@ const deletePaiment = (id)=> {
 }
 </div>
 
-
-
-
-
-
-
-
-
-     
       </div>
       <footer className="footer">
         <div className="container-fluid">

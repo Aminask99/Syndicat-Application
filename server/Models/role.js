@@ -1,23 +1,13 @@
- const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
  const mongoose = require('mongoose');
  const Schema =mongoose.Schema
 
  const RoolSchema =new Schema({
-  UserName: {
-    type: String,
-   
-},
-  Password: {
-    type: String,
-},
+    role: {
+        type: String,
+        required: true,
+    },  
  });
  
- RoolSchema.methods.generateAuthTokenAndSaveUser = async function(){
-    const token = jwt.sign({ _id: this._id.toString() }, 'foormm');
-   //  this.tokens.push({ token })
-   //  await this.save()
-    return token
-
- }
  const rool = mongoose.model('Role',RoolSchema)
 module.exports= rool

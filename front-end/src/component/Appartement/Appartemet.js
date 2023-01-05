@@ -254,17 +254,17 @@ const deletApartement = (id)=> {
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">appartement</label>
     <input type="text"
-    name="Name_appartement" value={Name_appartement} onChange={(e) => setAppartement(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
+    name="Name_appartement" value={Name_appartement} onChange={(e) => setAppartement(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="appartement" />
   </div>
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">nb tage</label>
     <input type="text"
-    name="Nb_etage" value={Nb_etage} onChange={(e) => setEtage(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
+    name="Nb_etage" value={Nb_etage} onChange={(e) => setEtage(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="nb etage" />
   </div>
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">ville</label>
     <input type="text"
-    name="ville" value={ville} onChange={(e) => setVille(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
+    name="ville" value={ville} onChange={(e) => setVille(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="ville" />
   </div>
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">prix</label>
@@ -275,7 +275,7 @@ const deletApartement = (id)=> {
     <label htmlFor="exampleInputEmail1">address</label>
     <input type="text"
     name="address" value={address} onChange={(e) => setAdress(e.target.value)}
-     className="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+     className="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="address" />
     <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
   <div className="form-check">

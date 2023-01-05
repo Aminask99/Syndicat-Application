@@ -61,7 +61,8 @@ const deleteAppartement = (async (req, res) => {
             return  res.status(400).json({message:"Not delet code promo"})
         }  
     })
-    const getAllAppartemnet = ( async(req,res)=>{
+
+const getAllAppartemnet = ( async(req,res)=>{
         try {
             const allAppartement = await db.find()
             res.status(200).send(allAppartement)
@@ -69,7 +70,7 @@ const deleteAppartement = (async (req, res) => {
             res.status(400)
             throw new Error(error)
         }
- })
+    })
     
 module.exports = {
     craeteAppartement,

@@ -7,6 +7,7 @@ const routerPaiement = require("./Routes/PaiementRouters")
 const Auth = require("./Routes/AuthRouter")
 const roleModal = require("./Models/role")
 const cookiepaeser= require("cookie-parser")
+const ApiError = require("./Utils/apiError")
 const cors = require('cors'); // prowser annalizer cookie fy header
 
 
@@ -21,7 +22,23 @@ app.use('/api', routerAppartement);
 app.use('/api', routerPaiement );
 app.use('/api', Auth );
 
-// app.set("view engine", "ejs");
+app.all('*',(req,res,next) => {
+    next(new ApiError(`can't find this route: ${req.originalUrl}`,400))
+});
+
+// * handling middleware
+app.use((err,req,res,next)=>{
+    err.statusCode=err.statusCode || 500;
+    err.status=err.status || "error"
+
+    res.status( err.statusCode).json({ 
+        status:err.status,
+        error:err,
+        message:err.message,
+        stack:err.stack,
+     });
+    });
+
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, (err)=> {

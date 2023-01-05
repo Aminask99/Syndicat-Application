@@ -11,7 +11,7 @@ export default function Login() {
   const [UserName, setUserName] = useState("")
   const [Password, setPassword] = useState("")
   // const [error, setError] = useState(false)
-
+  const navigate = useNavigate()
   // const navigate = useNavigate()
   const handleApi = (e) => {
     e.preventDefault()
@@ -29,6 +29,22 @@ export default function Login() {
     })
 
       .then(result => {
+
+        if (result.data.tokens) {
+         
+          const role = result.data.user.tokens.token;
+          localStorage.setItem("role", role)
+          localStorage.setItem('UserName', result.data.user.UserName);
+          localStorage.setItem('Password', result.data.user.Password);
+
+          console.log(result.data.user.role)
+          navigate('/appartement')
+         
+        }
+
+
+
+
         console.log(result)
           // const role = result.data.user.role.role;
 
@@ -39,6 +55,7 @@ export default function Login() {
          
           // navigate('/' + role)
           toast.success("login Success")
+          navigate('/appartement')
         
         const msg = result.data.message;
         toast.success(msg)

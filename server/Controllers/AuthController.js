@@ -1,4 +1,4 @@
-const db = require("../Models/role")
+const db = require("../Models/AuthModl")
 const bcrypt = require("bcryptjs")
 const cookie = require("../Utils/cokie")
 const Role = require("../Models/role")
@@ -15,13 +15,14 @@ const Register = (req, res ) => {
                 error: err
             })
         }
-        // let role = req.body.role || "admin";
+        let role = req.body.role ;
 
-        // let { _id } = await Role.findOne({ role})
+        let { _id } =  Role.findOne({ role})
         console.log(req.body)
         let admin =  new db ({
             UserName: req.body.UserName,
-            Password: hashedPass
+            Password: hashedPass,
+            role: _id
            
         })
         admin.save()
@@ -43,7 +44,7 @@ const Login =async (req, res) => {
 
     try {
         res.cookie('access-token', cookie) //access cookie
-        const user = await db.findOne({ UserName: req.body.UserName });
+        const user = await db.findOne({ UserName: req.body.UserName }).populate("role")
         console.log(user);
         if (user) {
           const cmp =  bcrypt.compare(req.body.Password, user.Password);
@@ -52,6 +53,7 @@ const Login =async (req, res) => {
             return res.status(200).json({
                       user,
                       token
+                      
             })
           } else {
             

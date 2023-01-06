@@ -251,25 +251,27 @@ const deletePaiment = (id)=> {
                  
                  
       <Button variant="primary" onClick={handleShow}>
-        add paiement
+        add factor
       </Button>
   
 
       <Modal className="tetx-white" show={show} onHide={handleClose}>
         <Modal.Header className="bg-dark" closeButton>
-          <Modal.Title className="text-white">Paiement</Modal.Title>
+          <Modal.Title className="text-white">factor</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-dark">
           
      <form className='text-white'>
  
+ <select name="Name"value={Name_Client} onChange={(e) => setName_Client(e.target.value)} class="form-select text-black" aria-label="Default select example">
+  <option selected>Name</option>
+  {companyList.map(conpan =>(
+     <option value={conpan.Name_Client}key={conpan.id}>{conpan.Name_Client}</option>
+  ))}
+  </select>
+
   <div className="form-group">
-    <label htmlFor="exampleInputPassword1">Name</label>
-    <input type="text"
-    name="Name_Client" value={Name_Client} onChange={(e) => setName_Client(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
-  </div>
-  <div className="form-group">
-    <label htmlFor="exampleInputPassword1">date facteur</label>
+    <label htmlFor="exampleInputPassword1">date factor</label>
     <input type="date"
     name="date_facteur" value={date_facteur} onChange={(e) => setDatefacteur(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="Password" />
   </div>

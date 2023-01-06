@@ -8,7 +8,6 @@ import { Navigate, Outlet } from "react-router"
  
     return token ? <Outlet/> : <Navigate to="/"/>
 
-
 }
 
 export default ProtectedRoutes

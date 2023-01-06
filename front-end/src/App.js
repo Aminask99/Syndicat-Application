@@ -5,7 +5,7 @@ import Paiement from './component/Paiement/Paiement'
 import ProtectedRoutes from './component/ProtectedRoutes'
 import {Routes, Route} from "react-router-dom";
 import {ToastContainer} from 'react-toastify';
-import PDFFile from './component/PdfFille'
+
 import './App.css';
 
 function App() {
@@ -13,8 +13,13 @@ function App() {
     <div>
    
     <Routes>
-    {/* <Nav/> */}
-    <Route exact path="/PDFFile" element={<PDFFile />} />
+   
+
+    
+
+
+
+  {/* <Route exact path="/ " element={<PDFFile />} /> */}
 <Route exact path="/" element={<Login/>} />
 
 <Route element={<ProtectedRoutes />}>

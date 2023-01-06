@@ -21,9 +21,13 @@ const MyDocument = () => (
       <View style={styles.section}>
         <Text>Section #1</Text>
       </View>
-      <View style={styles.section}>
-        <Text>Section #2</Text>
-      </View>
+     
+        <Text>In academic terms, a text is anything that conveys a set of meanings to the person who examines it. You might have thought that texts were limited to written materials, such as books, magazines, newspapers, and ‘zines (an informal term for magazine that refers especially to fanzines and webzines).</Text>
+     <text> 
+      style={styles.pageNumber}
+      {/* render={({pageNumber,totalPages})=> `${pageNumber} / ${totalPages}`} */}
+      fexed
+     </text>
     </Page>
   </Document>
 );

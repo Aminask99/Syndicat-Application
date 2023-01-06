@@ -1,9 +1,11 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState,useEffect, useRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'
+import { useReactToPrint } from 'react-to-print';
 import './paiement.css';
+
 
 
 export default function Appartemet() {
@@ -12,6 +14,9 @@ export default function Appartemet() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
+  const contentCard = useRef();
 
 //api 
 
@@ -24,6 +29,17 @@ export default function Appartemet() {
   const [date_payment, setDate_payment] = useState("")
   const [apartement, setaPartement] = useState("")
   const [companyList,setCompanyList]=useState([])
+
+
+  const handlePrint=useReactToPrint({
+      content: ()=> contentCard.current,
+      // pageStyle:()=>
+      // {
+      //   return `@page { margin: ${marginTop} ${marginRight} ${marginBottom} ${marginLeft} !important; }`;
+      // },
+      onAterPrint:()=> alert('Print success')
+  })
+
 
 useEffect(()=>{
   const fetchData =async ()=>{
@@ -266,7 +282,7 @@ const deletePaiment = (id)=> {
  <select name="Name"value={Name_Client} onChange={(e) => setName_Client(e.target.value)} class="form-select text-black" aria-label="Default select example">
   <option selected>Name</option>
   {companyList.map(conpan =>(
-     <option value={conpan.Name_Client}key={conpan.id}>{conpan.Name_Client}</option>
+  <option value={conpan.Name_Client}key={conpan.id}>{conpan.Name_Client}</option>
   ))}
   </select>
 
@@ -331,7 +347,7 @@ const deletePaiment = (id)=> {
         { db.map((item ) => {
     return(
 
-<div className="container mt-5 mb-3">
+<div  className="container mt-5 mb-3" ref={contentCard}>
   <div className="row">
     <div className="col-md-">
       <div className="card p-3 mb-2">
@@ -348,7 +364,8 @@ const deletePaiment = (id)=> {
           <p className="heading">la date de facteur:{item.date_facteur}<br /> date de oayment :{item.date_payment}</p>
           <p className="heading">{item.apartement}</p>
           <div className="mt-5">
-          <a href="#" className="btn mr-2">Imprémer</a>
+          <button  onClick={handlePrint} className="btn mr-2">Imprémer</button>
+         
             <div className="mt-3"> <span className="text1">32 Applied <span className="text2">facteur</span></span> </div>
           </div>
         </div>

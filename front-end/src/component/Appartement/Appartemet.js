@@ -2,6 +2,7 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Update from'./Update'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -19,16 +20,19 @@ export default function Appartemet() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-//api 
+
+  //api 
   const [db,setDb]= useState([])
   const [loading, setLoading] = useState(false)
   const [update , SetUpdate] = useState('')
-  
-  const [Name_appartement, setAppartement] = useState("")
+
+  const [Name_Client, setName_Client] = useState("")
+  const [Recidance, setRecidance] = useState("")
   const [Nb_etage, setEtage] = useState("")
   const [ville, setVille] = useState("")
   const [prix, setPrix] = useState("")
   const [address, setAdress] = useState("")
+
 
   const getAppartement = async () => {
    
@@ -40,13 +44,14 @@ export default function Appartemet() {
     getAppartement()
     SetUpdate('all data')
   }, [update])
-  console.log(db)
+  // console.log(db)
 
   const Appartement =(e)=>{
        e.preventDefault()
   axios.post('http://localhost:8080/api/craeteAppartement', {
-      
-  Name_appartement: Name_appartement,
+   
+  Name_Client: Name_Client,
+  Recidance: Recidance,
   Nb_etage: Nb_etage,
   ville: ville,
   prix: prix,
@@ -70,12 +75,14 @@ const deletApartement = (id)=> {
     SetUpdate('delete data')
     setLoading(true)
 
-    console.log(result)
+    // console.log(result)
   })
   .catch(err => {
     console.log(err)
   })    
 }
+
+
 function logout() {
 
   localStorage.clear();
@@ -83,15 +90,11 @@ function logout() {
 
 }
 
-// console.log(codepromo)
  return (
     <div>
          <div>
   <div className="wrapper ">
  <div className="sidebar">
-  {/*
-  Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
-    */}
   <div className="sidebar-wrapper ">
     <div className="logo">
       <a href="http://www.creative-tim.com" className="simple-text logo-mini">
@@ -118,7 +121,6 @@ function logout() {
     </ul>
   </div>
 </div>
-
     <div className="main-panel">
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-absolute navbar-transparent   ">
@@ -141,26 +143,10 @@ function logout() {
           <div className="collapse navbar-collapse" id="navigation">
             <ul className="navbar-nav ml-auto ">
               <div className="search-bar input-group">
-                {/* <input type="text" class="form-control" placeholder="Search...">
-<div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div> */}
+       
                 <button className="btn btn-link" id="search-button" data-toggle="modal" data-target="#searchModal"><i className="tim-icons icon-zoom-split" /></button>
-                {/* You can choose types of search input */}
+         
               </div>
-              {/* <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-<div class="modal-content">
-  <div class="modal-header">
-    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="SEARCH">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <i class="tim-icons icon-simple-remove"></i>
-    </button>
-  </div>
-
-  <div class="modal-footer">
-  </div>
-</div>
-    </div>
-  </div> */}
               <li className="dropdown nav-item">
                 <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div className="notification d-none d-lg-block d-xl-block" />
@@ -190,7 +176,6 @@ function logout() {
               <li className="dropdown nav-item">
                 <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div className="photo">
-                    <img src="../assets/img/anime3.png" />
                   </div>
                   <b className="caret d-none d-lg-block d-xl-block" />
                   <p className="d-lg-none">
@@ -249,14 +234,12 @@ function logout() {
 
             <>
           
-            <Button className="" variant="primary" onClick={handleShow}>
+      <Button className="" variant="primary" onClick={handleShow}>
         add appartement
       </Button>
       <h1> {UserName} </h1>
       <Link to="/Register" className="book-a-table-btn scrollto d-none d-lg-flex" onClick={logout}>logout</Link>
         
-     
-
       <Modal  className="text-white"show={show} onHide={handleClose}>
         <Modal.Header className="bg-dark" closeButton>
           <Modal.Title>Appartement</Modal.Title>
@@ -265,10 +248,15 @@ function logout() {
           
      <form>
  
+     <div className="form-group">
+    <label htmlFor="exampleInputPassword1">Name</label>
+    <input type="text"
+    name="Name_Client" value={Name_Client} onChange={(e) => setName_Client(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="appartement" />
+  </div>
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">appartement</label>
     <input type="text"
-    name="Name_appartement" value={Name_appartement} onChange={(e) => setAppartement(e.target.value)} className="form-control text-red" id="exampleInputPassword1" placeholder="appartement" />
+    name="Recidance" value={Recidance} onChange={(e) => setRecidance(e.target.value)} className="form-control " id="exampleInputPassword1" placeholder="appartement" />
   </div>
   <div className="form-group">
     <label htmlFor="exampleInputPassword1">nb tage</label>
@@ -306,7 +294,7 @@ function logout() {
           </Button>
           <Button    type="button"
           className="btn btn-light"
-          data-bs-dismiss="modal"variant="primary"  onClick={Appartement}>
+          data-bs-dismiss="modal"variant="primary" onClick={Appartement}>
             Save Changes
           </Button>
         </Modal.Footer>
@@ -319,12 +307,12 @@ function logout() {
             </div>
           </div>
         </div>
-        <div className='element '>
+        {/* <div className='element '>
         { db.map((item ) => {
     return(
 
 
-<div className="container mx-auto mt-4">
+<div  key={item.id}className="container mx-auto mt-4">
   <div className="row">
     <div className="col-md-4">
       <div className="card bghh" style={{width: '18rem'}}>
@@ -332,28 +320,97 @@ function logout() {
         <div className="card-body">
           <h5 className="card-title">{item.Name_appartement }</h5>
           <h6 className="card-subtitle mb-2 text-muted">{item.Nb_etage}</h6>
-          <p className="card-text">{item.ville}</p>
+          <p className="card-text">{item.Nb_etage}</p>
           <h6 className="card-subtitle mb-2 text-muted">{item.prix}</h6>
           <h6 className="card-subtitle mb-2 text-muted">{item.address}</h6>
           <a href="#" onClick={() => deletApartement(item.id)}  className="btn mr-2">delete</a>
-          <a href="#" className="btn "><i className="fab fa-github w-50" /></a>
+
+          <a href="" onClick={()=>Update
+            (item.id)} className="btn mr-2">update</a>
+
+
+
+
+
+        
         </div>
       </div>
     </div>            
   </div>
 </div>
 
-
-
-
-
-
-   
     )
 }
 )
 }
+</div> */}
+
+<div>
+  <h2>Created with love by <a href="https://github.com/pablorgarcia" target="_blank">Pablo García</a></h2>
+  <table className="container">
+    <thead>
+      <tr>
+        <th><h1>id</h1></th>
+        <th><h1>Name</h1></th>
+        <th><h1>Recidance</h1></th>
+        <th><h1>Nb_etage</h1></th>
+        <th><h1>ville</h1></th>
+        <th><h1>prix</h1></th>
+        <th><h1>address</h1></th>
+        <th><h1>update</h1></th>
+        <th><h1>delete</h1></th>
+      </tr>
+    </thead>
+    <tbody>
+    { db.map((item ) => {
+      return(
+        
+        <tr key={item._id}>
+        <td>{item._id} </td>
+        <td>{item.Name_Client }</td>
+        <td>{item.Recidance }</td>
+        <td>{item.Nb_etage}</td>
+        <td>{item.ville}</td>
+        <td>{item.prix}</td>
+        <td>{item.address}</td>
+      <td className='up'>
+      <a href="#" onClick={() => deletApartement(item._id)}  className="btn mr-2">delete</a>
+
+      </td>
+      <td>
+   
+      <Update id={item._id}/>
+      </td>
+     
+      </tr>
+      )
+    })}
+ 
+    </tbody>
+  </table>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

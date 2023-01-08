@@ -204,7 +204,6 @@ const deletePaiment = (id)=> {
               <li className="dropdown nav-item">
                 <a href="#" className="dropdown-toggle nav-link" data-toggle="dropdown">
                   <div className="photo">
-                    <img src="../assets/img/anime3.png" />
                   </div>
                   <b className="caret d-none d-lg-block d-xl-block" />
                   <p className="d-lg-none">

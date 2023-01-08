@@ -3,6 +3,7 @@ import Appartement from './component/Appartement/Appartemet'
 import Login from './component/login/Login'
 import Paiement from './component/Paiement/Paiement'
 import ProtectedRoutes from './component/ProtectedRoutes'
+import Update from'./component/Appartement/Update'
 import {Routes, Route} from "react-router-dom";
 import {ToastContainer} from 'react-toastify';
 
@@ -24,6 +25,7 @@ function App() {
 
 <Route element={<ProtectedRoutes />}>
 <Route exact path="/appartement" element={<Appartement/>} />
+{/* <Route exact path='/update' element={<Update/>}/> */}
 <Route exact path="/paiement" element={<Paiement/>} />
 </Route>
 

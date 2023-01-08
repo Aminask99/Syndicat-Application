@@ -4,7 +4,8 @@ const craeteAppartement=(req,res) =>{
 
     console.log(req.body);
     let Appartement = new db({
-        Name_appartement: req.body.Name_appartement,
+        Name_Client: req.body.Name_Client,
+        Recidance: req.body.Recidance,
         Nb_etage: req.body.Nb_etage,
         ville: req.body.ville,
         prix: req.body.prix,
@@ -26,28 +27,22 @@ const craeteAppartement=(req,res) =>{
 
 const updateAppartement = ( async(req,res)=>{
 
-        const {Name_appartement, Nb_etage, ville, prix, address } = req.body
-        const id =  req.params.id;
-    
-        try {
-            // functin update produit
-            const updateAppartement = await db.findOne({where:{id:id}})
-    
-            if(updateAppartement){
-                updateAppartement.Name_appartement = Name_appartement
-                updateAppartement.Nb_etage = Nb_etage
-                updateAppartement.ville = ville
-                updateAppartement.prix = prix
-                updateAppartement.address = address
-              
-                updateAppartement.save()
-                
-                res.status(200).send('update  success')
-            }
-        } catch (error) {
-                res.status(400)
-                throw new Error(error)
-            }
+    const { _id } = req.params
+    const NewClient = req.body.Name_Client
+    const NewRecidance = req.body.Recidance
+    const NewNb_etage = req.body.Nb_etage
+    const NewVille = req.body.ville
+    const NewPrix = req.body.prix
+    const NewAddress = req.body.address
+
+    db.findById(_id)
+        .then((e) => {
+            db.updateOne({ _id: _id }, { Name_Client: NewClient, Recidance: NewRecidance, Nb_etage: NewNb_etage,ville:NewVille,prix:NewPrix,address:NewAddress })
+                .then((e) => {
+                    res.json('PAARTEMENT UPDATED')
+                })
+        })
+        .catch((error) => { res.json('ERROR UPDATING APPARTEMENT') })
     })
 
 const deleteAppartement = (async (req, res) => {
@@ -60,6 +55,19 @@ const deleteAppartement = (async (req, res) => {
             // console.log(err)
             return  res.status(400).json({message:"Not delet code promo"})
         }  
+    })
+
+    const getOneAppartement = (async (req, res) => {
+        const {id} = req.params
+        try{
+            const OneAppartement = await db.findById(id)
+            console.log(OneAppartement)
+            res.status(200).send(OneAppartement)
+        } catch (error) {
+            res.status(400)
+            throw new Error(error)
+        }
+        
     })
 
 const getAllAppartemnet = ( async(req,res)=>{
@@ -76,5 +84,6 @@ module.exports = {
     craeteAppartement,
     updateAppartement,
     deleteAppartement,
+    getOneAppartement,
     getAllAppartemnet
 }

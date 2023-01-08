@@ -3,31 +3,31 @@
  const Schema =mongoose.Schema
 
  const AppartementSchema =new Schema({
-    Name_appartement: {
+    Name_Client: {
         type: String,
-        required: true,
-       
-       
+        // required: true,    
+    },
+    Recidance: {
+        type: String,
+        // required: true,   
     },
     Nb_etage: {
-        type: String,
-        required: true,
-        
+        type: Number,
+        // required: true,    
     },
     ville: {
         type: String,
-        required: true,
-       
+        // required: true,  
     },
     prix: {
         type: Number,
-        required: true,
+        // required: true,
       
       
     }, 
     address : {
         type: String,
-        required: true,
+        // required: true,
        
     },
     

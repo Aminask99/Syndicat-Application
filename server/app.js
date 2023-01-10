@@ -8,7 +8,12 @@ const Auth = require("./Routes/AuthRouter")
 const roleModal = require("./Models/role")
 const cookiepaeser= require("cookie-parser")
 const ApiError = require("./Utils/apiError")
-const cors = require('cors'); // prowser annalizer cookie fy header
+const cors = require('cors');
+const auth = require("./middleware/auth");
+
+// app.get("/welcome", auth, (req, res) => {
+//     res.status(200).send("Welcome 🙌 ");
+//   });
 
 
 dotenv.config();
@@ -21,6 +26,8 @@ app.use(cors());
 app.use('/api', routerAppartement);
 app.use('/api', routerPaiement );
 app.use('/api', Auth );
+
+
 
 app.all('*',(req,res,next) => {
     next(new ApiError(`can't find this route: ${req.originalUrl}`,400))

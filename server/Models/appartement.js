@@ -12,7 +12,7 @@
         // required: true,   
     },
     Nb_etage: {
-        type: Number,
+        type: String,
         // required: true,    
     },
     ville: {

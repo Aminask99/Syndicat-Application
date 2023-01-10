@@ -27,7 +27,7 @@ const craeteAppartement=(req,res) =>{
 
 const updateAppartement = ( async(req,res)=>{
 
-    const { _id } = req.params
+    const { id } = req.params
     const NewClient = req.body.Name_Client
     const NewRecidance = req.body.Recidance
     const NewNb_etage = req.body.Nb_etage
@@ -35,9 +35,9 @@ const updateAppartement = ( async(req,res)=>{
     const NewPrix = req.body.prix
     const NewAddress = req.body.address
 
-    db.findById(_id)
+    db.findById(id)
         .then((e) => {
-            db.updateOne({ _id: _id }, { Name_Client: NewClient, Recidance: NewRecidance, Nb_etage: NewNb_etage,ville:NewVille,prix:NewPrix,address:NewAddress })
+            db.updateOne({ _id: id }, { Name_Client: NewClient, Recidance: NewRecidance, Nb_etage: NewNb_etage,ville:NewVille,prix:NewPrix,address:NewAddress })
                 .then((e) => {
                     res.json('PAARTEMENT UPDATED')
                 })
@@ -48,7 +48,7 @@ const updateAppartement = ( async(req,res)=>{
 const deleteAppartement = (async (req, res) => {
         const id =  req.params.id;
         try {
-            const deleteAppartement = await db.deleteOne({where:{id}})
+           await db.deleteOne({_id: id })
             return  res.status(200).json({message:"delete success"})
             
         } catch (err) {

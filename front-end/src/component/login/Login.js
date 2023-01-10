@@ -3,6 +3,7 @@ import { useState,Navigate } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import './login.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -10,16 +11,13 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
   const [UserName, setUserName] = useState("")
   const [Password, setPassword] = useState("")
-  // const [error, setError] = useState(false)
+
 
   const navigate = useNavigate()
+  
   const handleApi = (e) => {
     e.preventDefault()
 
-    // if (email.length == 0 || password.length == 0) {
-    //   setError(true)
-   
-    // }
 
     axios.post('http://localhost:8080/api/login', {
 
@@ -29,22 +27,13 @@ export default function Login() {
     })
 
       .then(result => {
+        console.log(result)
        
-       console.log(result.data.user.tokens[0])
-       localStorage.setItem("token",result.data.user.tokens[0].token);
+       console.log(result.data.token)
+      //  console.log(result)
+       localStorage.setItem("token",result.data.token);
        localStorage.setItem("UserName",result.data.user.UserName);
        navigate("/appartement")
-     
-          // const role = result.data.user.role.role;
-
-          // localStorage.setItem("role", role)
-          // localStorage.setItem('email', result.data.user.email);
-          // localStorage.setItem('name', result.data.user.name);
-
-         
-          // navigate('/' + role)
-        
-          
         
         const msg = result.data.message;
         toast.success(msg)
@@ -58,50 +47,84 @@ export default function Login() {
 
   return (
     <div>
-       <section className="ftco-section">
-  <div className="container">
-    <div className="row justify-content-center">
-    </div>
-    <div className="row justify-content-center">
-      <div className="col-md-6 col-lg-5">
-        <div className="login-wrap p-4 p-md-5">
-          <div className="icon d-flex align-items-center justify-content-center">
-            <span className="fa fa-user-o" />
+
+<div className="login-root">
+  <div className="box-root flex-flex flex-direction--column" style={{minHeight: '100vh', flexGrow: 1}}>
+    <div className="loginbackground box-background--white padding-top--64">
+      <div className="loginbackground-gridContainer">
+        <div className="box-root flex-flex" style={{gridArea: 'top / start / 8 / end'}}>
+          <div className="box-root" style={{backgroundImage: 'linear-gradient(white 0%, rgb(247, 250, 252) 33%)', flexGrow: 1}}>
           </div>
-          <h3 className="text-center mb-4">Have an account?</h3>
-          <form action="#" className="login-form">
-            <div className="form-group">
-              <input type="text"
-               name="UserName" value={UserName} onChange={(e) => setUserName(e.target.value)} 
-               className="form-control rounded-left" placeholder="Username" required />
-            </div>
-            <div className="form-group d-flex">
-              <input type="password"
-              name="Password" value={Password} onChange={(e) => setPassword(e.target.value)} 
-              className="form-control rounded-left" placeholder="Password" required />
-            </div>
-            <div className="form-group d-md-flex">
-              <div className="w-50">
-                <label className="checkbox-wrap checkbox-primary">Remember Me
-                  <input type="checkbox" defaultChecked />
-                  <span className="checkmark" />
-                </label>
-              </div>
-              <div className="w-50 text-md-right">
-                <a href="#">Forgot Password</a>
-              </div>
-            </div>
-            <div className="form-group">
-              <button type="submit" 
-              onClick={handleApi}
-              className="btn btn-primary rounded submit p-3 px-5">Get Started</button>
-            </div>
-          </form>
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '4 / 2 / auto / 5'}}>
+          <div className="box-root box-divider--light-all-2 animationLeftRight tans3s" style={{flexGrow: 1}} />
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '6 / start / auto / 2'}}>
+          <div className="box-root box-background--blue800" style={{flexGrow: 1}} />
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '7 / start / auto / 4'}}>
+          <div className="box-root box-background--blue animationLeftRight" style={{flexGrow: 1}} />
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '8 / 4 / auto / 6'}}>
+          <div className="box-root box-background--gray100 animationLeftRight tans3s" style={{flexGrow: 1}} />
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '2 / 15 / auto / end'}}>
+          <div className="box-root box-background--cyan200 animationRightLeft tans4s" style={{flexGrow: 1}} />
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '3 / 14 / auto / end'}}>
+          <div className="box-root box-background--blue animationRightLeft" style={{flexGrow: 1}} />
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '4 / 17 / auto / 20'}}>
+          <div className="box-root box-background--gray100 animationRightLeft tans4s" style={{flexGrow: 1}} />
+        </div>
+        <div className="box-root flex-flex" style={{gridArea: '5 / 14 / auto / 17'}}>
+          <div className="box-root box-divider--light-all-2 animationRightLeft tans3s" style={{flexGrow: 1}} />
         </div>
       </div>
     </div>
+    <div className="box-root padding-top--24 flex-flex flex-direction--column" style={{flexGrow: 1, zIndex: 9}}>
+      <div className="box-root padding-top--48 padding-bottom--24 flex-flex flex-justifyContent--center">
+        <h1><a href="http://blog.stackfindover.com/" rel="dofollow">Syndicat</a></h1>
+      </div>
+      <div className="formbg-outer">
+        <div className="formbg">
+          <div className="formbg-inner padding-horizontal--48">
+            <span className="padding-bottom--15">Sign in to your account</span>
+
+
+            <form id="stripe-login">
+              <div className="field padding-bottom--24">
+                <label htmlFor="email">UserName</label>
+                <input  name="UserName" value={UserName} onChange={(e) => setUserName(e.target.value)}  />
+              </div>
+              <div className="field padding-bottom--24">
+                <div className="grid--50-50">
+                  <label htmlFor="password">Password</label>
+                 
+                </div>
+                <input type="password"   name="Password" value={Password} onChange={(e) => setPassword(e.target.value)}  />
+              </div>
+              <div className="field field-checkbox padding-bottom--24 flex-flex align-center">
+                <label htmlFor="checkbox">
+                  <input type="checkbox" name="checkbox" /> Stay signed in for a week
+                </label>
+              </div>
+              <div className="field padding-bottom--24">
+                <input  onClick={handleApi}  type="submit" name="submit" defaultValue="Continue" />
+              </div>
+              <div className="field">
+                <a className="ssolink" href="#">Use single sign-on (Google) instead</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      
+      </div>
+    </div>
   </div>
-</section>
+</div>
+
+
 
     </div>
   )

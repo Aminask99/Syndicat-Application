@@ -16,7 +16,7 @@
         type: Date,
         required: true,
     },
-    apartement: {
+    Recidance: {
         type: String,
         required: true,
       

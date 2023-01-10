@@ -10,24 +10,25 @@ const jwt = require('jsonwebtoken')
     Password: {
         type: String,
     },
-    tokens:[{
       
-        token:{ 
-            type: String, 
-        }
-    }],
     role: {
         type: mongoose.Types.ObjectId,
         ref: "Role"  // refernse table 
     }
     
  });
- AdminSchema.methods.generateAuthTokenAndSaveUser = async function(){
-    const token = jwt.sign({ _id: this._id.toString() }, 'foormm');
-    this.tokens.push({ token })
-    await this.save()
+ AdminSchema.methods.generateAuthTokenAndSaveUser =  function(){
+    const token = jwt.sign(
+        {  _id: this._id.toString() },
+        process.env.TOKEN_KEY,
+        {
+          expiresIn: "2h",
+        }
+      );
+
+  
     return token
-    // console.log(token)
+   
 
  }
  const User = mongoose.model('admin',AdminSchema)

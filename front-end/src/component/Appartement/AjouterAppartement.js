@@ -1,59 +1,62 @@
-import React,{useState,useEffect} from 'react'
+import React from 'react'
+import { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios'
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import axios from 'axios'
+import {Outlet} from 'react-router-dom'
 
-
-
-export default function Update(props) {
+export default function AjouterAppartement() {
 
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //api
   const [loading, setLoading] = useState(false)
   const [update , SetUpdate] = useState('')
 
+  const [Name_Client, setName_Client] = useState("")
+  const [Recidance, setRecidance] = useState("")
+  const [Nb_etage, setEtage] = useState("")
+  const [ville, setVille] = useState("")
+  const [prix, setPrix] = useState("")
+  const [address, setAdress] = useState("")
 
-  const [item,setItem]= useState([])
+ 
+    const AjouterAppartement =()=>{
+       
+   axios.post('http://localhost:8080/api/craeteAppartement', { 
+   Name_Client: Name_Client,
+   Recidance: Recidance,
+   Nb_etage: Nb_etage,
+   ville: ville,
+   prix: prix,
+   address: address
+ })
+   .then(result => {
+    SetUpdate('add appartement')
+    setLoading(true)
+    handleClose()
+    console.log(result)
+ 
+ })
+ .catch(err => {
+ console.log(err)
+ })
+ }
+ useEffect(() => {
 
-  const getOneAppartement = async (id)=> {
-  
-   await axios.get(`http://localhost:8080/api/getOneAppartement/${id}`) //endPoint
-    .then(result => {
-      setItem(result.data)
-      console.log(result.data)
-      SetUpdate('delete data')
-      setLoading(true)
-
-      handleShow()
-    })
-    .catch(err => {
-      console.log(err)
-    })    
-  }
-
-  const updateAppartement= async(id)=>{
-    await axios.put(`http://localhost:8080/api/update/${id}`) 
-    .then((response)=>{
-      console.log(response.data);
-      SetUpdate('delete data')
-      setLoading(true)
-
-    }).catch((error)=>{
-      console.log(error);
-    })
-  }
+    SetUpdate('all data')
+  }, [update])
 
   return (
-<div className='w-50'>
+    <div>
 
 
 <>
-      <Button variant="dark"  onClick={() => getOneAppartement(props.id)}>
-       update
+      <Button variant="dark"  onClick={handleShow}>
+        add appartement
       </Button>
 
       <Modal show={show} onHide={handleClose}>
@@ -66,14 +69,13 @@ export default function Update(props) {
               <Form.Label>Name</Form.Label>
               <Form.Control  className="mb-3"
                name="Name_Client" 
-               value= {item.Name_Client}
-               onChange={(e) => setItem(e.target.value)}
+               onChange={(e) => setName_Client(e.target.value)}
                 type="text"
                 placeholder="entrer your Name"
                 autoFocus
               />
                <Form.Label>Recidance</Form.Label>
-                <Form.Select    className="mb-3"  name="Recidance"  value= {item.Name_Client}  onChange={(e) => setItem(e.target.value)} aria-label="Default select example">
+                <Form.Select    className="mb-3"  name="Recidance" onChange={(e) => setRecidance(e.target.value)} aria-label="Default select example">
       <option>recidence</option>
       <option >Marwa</option>
   <option >doha</option>
@@ -81,7 +83,7 @@ export default function Update(props) {
 
     </Form.Select>
     <Form.Label>Nb tage</Form.Label>
-              <Form.Select    className="mb-3"   name="Nb_etage" value={item.Nb_etage} onChange={(e) => setItem(e.target.value)}  aria-label="Default select example">
+              <Form.Select    className="mb-3"   name="Nb_etage"onChange={(e) => setEtage(e.target.value)}  aria-label="Default select example">
               <option >Nb Tage</option>
   <option >1éme</option>
   <option >2éme </option>
@@ -90,7 +92,7 @@ export default function Update(props) {
   <option >5éme</option>
     </Form.Select>
     <Form.Label>Ville</Form.Label>
-    <Form.Select  className="mb-3" name="Ville" value={item.ville}  onChange={(e) => setItem(e.target.value)} aria-label="Default select example">
+    <Form.Select  className="mb-3" name="Ville"onChange={(e) => setVille(e.target.value)} aria-label="Default select example">
       <option>Ville</option>
       <option >El jadida</option>
   <option  >Marakesh</option>
@@ -103,8 +105,7 @@ export default function Update(props) {
                  className="mb-3"
                 type="text"
                 name="prix"
-                value={item.prix}
-                 onChange={(e) => setItem(e.target.value)} 
+                value={prix} onChange={(e) => setPrix(e.target.value)} 
                 placeholder="enter price"
                 autoFocus
               />
@@ -113,7 +114,7 @@ export default function Update(props) {
               <Form.Control
                 type="text"
                 name="address"
-                value={item.address} onChange={(e) => setItem(e.target.value)}
+                value={address} onChange={(e) => setAdress(e.target.value)}
                 placeholder="enter address"
                 autoFocus
               />
@@ -134,15 +135,33 @@ export default function Update(props) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="dark" onClick={updateAppartement} >
+          <Button variant="dark" onClick={AjouterAppartement}>
             Save
           </Button>
         </Modal.Footer>
       </Modal>
     </>
+  
 
 
-</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+    </div>
   )
 }

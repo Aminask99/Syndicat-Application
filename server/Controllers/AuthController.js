@@ -18,7 +18,7 @@ const Register = (req, res ) => {
         let role = req.body.role ;
 
         let { _id } =  Role.findOne({ role})
-        console.log(req.body)
+        // console.log(req.body)
         let admin =  new db ({
             UserName: req.body.UserName,
             Password: hashedPass,
@@ -26,7 +26,7 @@ const Register = (req, res ) => {
            
         })
         admin.save()
-        console.log(req.body)
+        // console.log(req.body)
         if (admin){
             return  res.status(200).json({
                 message: 'User Creat '
@@ -49,6 +49,7 @@ const Login =async (req, res) => {
         if (user) {
           const cmp =  bcrypt.compare(req.body.Password, user.Password);
           if (cmp) {
+            
             const token = user.generateAuthTokenAndSaveUser();
             return res.status(200).json({
                       user,

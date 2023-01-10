@@ -6,7 +6,7 @@ const creationPaiement=(req,res) =>{
         Name_Client: req.body.Name_Client,
         date_facteur: req.body.date_facteur,
         date_payment: req.body.date_payment,
-        apartement: req.body.apartement,
+        Recidance: req.body.Recidance,
     })
     Paiement.save()
         .then(Paiement => {
@@ -24,7 +24,7 @@ const creationPaiement=(req,res) =>{
 
 const updatePaiement = ( async(req,res)=>{
 
-    const {Name_Client, date_facteur, date_payment, apartement } = req.body
+    const {Name_Client, date_facteur, date_payment, Recidance } = req.body
     const id =  req.params.id;
 
     try {
@@ -35,7 +35,7 @@ const updatePaiement = ( async(req,res)=>{
             updatePaiements.Name_Client = Name_Client
             updatePaiements.date_facteur = date_facteur
             updatePaiements.date_payment = date_payment
-            updatePaiements.apartement = apartement
+            updatePaiements.Recidance = Recidance
         
             updatePaiements.save()
             
@@ -49,14 +49,15 @@ const updatePaiement = ( async(req,res)=>{
 const deletePaiment = (async (req, res) => {
     const id =  req.params.id;
     try {
-        const deletePaiement = await db.deleteOne({where:{id}})
+        await db.deleteOne({_id: id })
         return  res.status(200).json({message:"delete success"})
         
     } catch (err) {
         // console.log(err)
-        return  res.status(400).json({message:"Not delet code promo"})
+        return  res.status(400).json({message:"Not delet factor"})
     }  
 })
+
 const getAllPaiements = ( async(req,res)=>{
     try {
         const allPaiement = await db.find()

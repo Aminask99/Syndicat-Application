@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import axios from 'axios'
 import Update from'./Update'
 import Ajouter from'./AjouterAppartement'
+import { toast } from 'react-toastify';
 
 export default function Table() {
 
@@ -14,7 +15,7 @@ export default function Table() {
    
         const res = await axios.get('http://localhost:8080/api/getAllAppartemnet')
         setDb(res.data)
-        SetUpdate('delete data')
+        SetUpdate('get data')
         setLoading(true)
       }
       useEffect(() => {
@@ -27,6 +28,7 @@ export default function Table() {
         // Simple DELETE request with axios
         axios.delete(`http://localhost:8080/api/delete/${id}`) //endPoint
         .then(result => {
+          toast.success("delete Success")
           SetUpdate('delete data')
           setLoading(true)
       

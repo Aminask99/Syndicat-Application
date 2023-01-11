@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import {Outlet} from 'react-router-dom'
+import { toast } from 'react-toastify';
 
 export default function AjouterAppartement() {
 
@@ -25,8 +25,9 @@ export default function AjouterAppartement() {
 
  
     const AjouterAppartement =()=>{
-       
+
    axios.post('http://localhost:8080/api/craeteAppartement', { 
+
    Name_Client: Name_Client,
    Recidance: Recidance,
    Nb_etage: Nb_etage,
@@ -35,6 +36,7 @@ export default function AjouterAppartement() {
    address: address
  })
    .then(result => {
+    toast.success("add appartement Success")
     SetUpdate('add appartement')
     setLoading(true)
     handleClose()

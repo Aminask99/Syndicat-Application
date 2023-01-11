@@ -24,6 +24,7 @@ export default function AffishCard() {
    
     const res = await axios.get('http://localhost:8080/api/getAllPaiements')
     setDb(res.data)
+    SetUpdate('get data')
     setLoading(true)
   }
   useEffect(() => {
@@ -36,8 +37,8 @@ export default function AffishCard() {
   
     axios.delete(`http://localhost:8080/api/deletePaiment/${id}`) //endPoint
     .then(result => {
-      toast.success("login Success")
-      SetUpdate('delete')
+      toast.success("delete Success")
+      SetUpdate('delete factor')
       setLoading(true)
     console.log(result)
    
@@ -47,12 +48,9 @@ export default function AffishCard() {
           toast.error('not delete factor')
         })    
       }
-
-      
+  
   return (
     <div>
-
-
 
 <div className="card-group shadow-lg p-3 mb-5 bg-body-tertiary rounded ">
     { db.map((item ) => {

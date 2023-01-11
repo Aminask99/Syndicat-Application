@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios'
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import { toast } from 'react-toastify';
 
 export default function AjouterFactr() {
 
@@ -50,6 +51,7 @@ Recidance: Recidance,
 })
 
 .then(result => {
+  toast.success("add factur Success")
  SetUpdate('add data')
  setLoading(true)
  handleClose()
@@ -62,7 +64,7 @@ console.log(err)
  useEffect(() => {
 
     SetUpdate('all data')
-  }, [])
+  }, [update])
 
   
   return (

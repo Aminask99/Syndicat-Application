@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
+import { toast } from 'react-toastify';
 
 
 
@@ -38,6 +39,7 @@ export default function Update(props) {
   const updateAppartement= async(id)=>{
     await axios.put(`http://localhost:8080/api/update/${id}`) 
     .then((response)=>{
+      toast.success("add appartement Success")
       console.log(response.data);
       SetUpdate('delete data')
       setLoading(true)

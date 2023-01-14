@@ -42,9 +42,8 @@ describe('test login', () => {
 
 describe('test register', () => {
     let body = {
-        name: 'amina',
-        email: 'aminasalik012@gmail.com',
-        password: 'AminaSalik120'
+        UserName: 'amina',
+        password: 'amina99@'
     }
 
     describe(' test :User Creat ', () => {

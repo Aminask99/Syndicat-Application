@@ -7,11 +7,12 @@ const creationPaiement=(req,res) =>{
         date_facteur: req.body.date_facteur,
         date_payment: req.body.date_payment,
         Recidance: req.body.Recidance,
+        prix: req.body.prix,
     })
     Paiement.save()
         .then(Paiement => {
             return  res.status(200).json({
-                message: 'User Creat '
+                message: 'factor Creat '
             });
         })
 
@@ -24,7 +25,7 @@ const creationPaiement=(req,res) =>{
 
 const updatePaiement = ( async(req,res)=>{
 
-    const {Name_Client, date_facteur, date_payment, Recidance } = req.body
+    const {Name_Client, date_facteur, date_payment, Recidance, prix } = req.body
     const id =  req.params.id;
 
     try {
@@ -36,6 +37,7 @@ const updatePaiement = ( async(req,res)=>{
             updatePaiements.date_facteur = date_facteur
             updatePaiements.date_payment = date_payment
             updatePaiements.Recidance = Recidance
+            updatePaiements.prix = prix
         
             updatePaiements.save()
             

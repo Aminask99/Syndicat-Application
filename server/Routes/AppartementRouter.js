@@ -4,7 +4,7 @@ const {craeteAppartement,updateAppartement,deleteAppartement,getAllAppartemnet,g
 //! Method = Post , URL = créationAppartement , Access = public
 Route.post('/craeteAppartement',craeteAppartement)
 
-Route.put('/update/:id',updateAppartement)
+Route.put('/updateAppartement/:id',updateAppartement)
 
 Route.delete('/delete/:id',deleteAppartement)
 

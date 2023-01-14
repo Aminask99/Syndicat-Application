@@ -39,10 +39,11 @@ const updateAppartement = ( async(req,res)=>{
         .then((e) => {
             db.updateOne({ _id: id }, { Name_Client: NewClient, Recidance: NewRecidance, Nb_etage: NewNb_etage,ville:NewVille,prix:NewPrix,address:NewAddress })
                 .then((e) => {
-                    res.json('PAARTEMENT UPDATED')
+                    
+                    return  res.json({message:'PAARTEMENT UPDATED'})
                 })
         })
-        .catch((error) => { res.json('ERROR UPDATING APPARTEMENT') })
+        .catch((error) => { res.json({message :'ERROR UPDATING APPARTEMENT'}) })
     })
 
 const deleteAppartement = (async (req, res) => {

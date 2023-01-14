@@ -21,6 +21,11 @@
         required: true,
       
     }, 
+    prix: {
+        type: Number,
+        required: true,
+      
+    }, 
     role: {
         type: mongoose.Types.ObjectId,
         ref: "Appartement"  // refernse table 

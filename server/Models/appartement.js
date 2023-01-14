@@ -22,8 +22,6 @@
     prix: {
         type: Number,
         // required: true,
-      
-      
     }, 
     address : {
         type: String,

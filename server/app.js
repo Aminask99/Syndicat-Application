@@ -4,6 +4,7 @@ const  dotenv = require('dotenv');
 const config = require('./Config_Db/Config')
 const routerAppartement = require("./Routes/AppartementRouter")
 const routerPaiement = require("./Routes/PaiementRouters")
+const routerProfil = require("./Routes/profil")
 const Auth = require("./Routes/AuthRouter")
 const roleModal = require("./Models/role")
 const cookiepaeser= require("cookie-parser")
@@ -23,6 +24,7 @@ app.use(express.urlencoded({extended:false}))
 app.use(cors()); 
   
  //*routes middleware
+app.use('/api', routerProfil);
 app.use('/api', routerAppartement);
 app.use('/api', routerPaiement );
 app.use('/api', Auth );

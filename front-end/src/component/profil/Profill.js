@@ -1,15 +1,17 @@
 import React from 'react'
-import './profil.css';
+import '../Appartement/appartement.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios'
 
 
 export default function Profill() {
-    const [db,setDb]= useState([])
-
+  const [db,setDb]= useState([])
+  const [loading, setLoading] = useState(false)
+  const [update , SetUpdate] = useState('')
+  
     const getAppartement = async () => {
 
-        const res = await axios.get('http://localhost:8080/api/getAllAppartemnet')
+        const res = await axios.get('http://127.0.0.1:8080/api/getProfil')
         setDb(res.data)
         SetUpdate('delete data')
         setLoading(true)
@@ -22,40 +24,36 @@ export default function Profill() {
 return (
 
   
-  <div className="card p-3">
-      { db.map((item) =>{
-        return(  
-    <div className="d-flex align-items-center">
-      <div className="image">
-        <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" className="rounded" width={155} />
-      </div>
-      <div className="ml-3 w-100">
-        <h4 className="mb-0 mt-0">Alex HMorrision</h4>
-        <span>Senior Journalist</span>
-        <div className="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-          <div className="d-flex flex-column">
-            <span className="articles">Articles</span>
-            <span className="number1">38</span>
-          </div>
-          <div className="d-flex flex-column">
-            <span className="followers">Followers</span>
-            <span className="number2">980</span>
-          </div>
-          <div className="d-flex flex-column">
-            <span className="rating">Rating</span>
-            <span className="number3">8.9</span>
-          </div>
-        </div>
-        <div className="button mt-2 d-flex flex-row align-items-center">
-          <button className="btn btn-sm btn-outline-primary w-100">Chat</button>
-          <button className="btn btn-sm btn-primary w-100 ml-2">Follow</button>
-        </div>
-      </div>
-    </div>
-    )
-})}
-</div>
+  <div className="customers">
+                        <div className="card">
+                            <div className="card-header">
+                                <h2>les Client</h2>
+                                <button>See all <span className="fas fa-arrow-right" /> </button>
+                            </div>
+                            <div className="card-body">
+                                { db.map((item) =>{
+                                return(
+                                <div className="customer">
+                                    <div className="info">
+                                        <img src="https://bit.ly/3bvT89p" height="40px" width="40px" alt="customer" />
+                                        <div>
+                                            <h4>{item.lastName}</h4>
+                                            <small>{item.dommaine }</small>
+                                        </div>
+                                    </div>
+                                    <div className="contact">
+                                        <span className="fas fa-user-circle" />
+                                        <span className="fas fa-comment" />
+                                        <span className="fas fa-phone-alt" />
+                                    </div>
+                                </div>
 
+                                )
+                                })}
+
+                            </div>
+                        </div>
+                    </div>
 
 )
 }
